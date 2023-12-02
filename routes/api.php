@@ -3,6 +3,8 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\api\CustomerController;
+use App\Http\Controllers\api\InvoiceController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -23,3 +25,8 @@ Route::get('student/{id}', [StudentController::class, 'show']);
 Route::get('student/{id}/edit', [StudentController::class, 'edit']);
 Route::put('student/{id}/edit', [StudentController::class, 'update']);
 Route::delete('student/{id}/delete', [StudentController::class, 'destroy']);
+
+Route::group(['prefix' => 'v1', 'namespace' =>'App\Http\Controllers\api'],function(){
+ Route::apiResource('customers', CustomerController::class);
+ Route::apiResource('invoices', InvoiceController::class);
+});
